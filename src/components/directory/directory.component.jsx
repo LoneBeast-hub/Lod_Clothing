@@ -46,6 +46,7 @@ export class Directory extends Component {
 
     render() {
         return(
+          // directory menu
             <div className="directory-menu">
                 {
                     this.state.sections.map(
