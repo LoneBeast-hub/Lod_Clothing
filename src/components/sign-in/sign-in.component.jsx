@@ -5,6 +5,8 @@ import { FormInput } from '../form-input/form-input.component';
 import { CustomButton } from '../custom-button/custom-button.component';
 // methods import
 import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase/firebase.utils';
 
 export class SignIn extends Component {
     constructor() {
@@ -16,13 +18,18 @@ export class SignIn extends Component {
         }
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
+        // state properties
+        const { email, password } = this.state;
+
         // on form submit, reset the input fields to empty
-        this.setState(() => {
-            return({ email: '', password: '' });
-        })
-        console.log(this.state)
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            this.setState({ email: '', password: '' })
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     handleChange = (event) => {
