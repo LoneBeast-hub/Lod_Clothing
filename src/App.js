@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './pages/homepage/homepage.component';
 import { ShopPage } from './pages/shop/shop.component';
 import Header from './components/header/header.component'
@@ -43,11 +43,17 @@ class App extends Component {
         <Routes>
           <Route exact path='/' element={ <HomePage/> } />
           <Route exact path='/shop' element={ <ShopPage/> } />
-          <Route exact path='/signin' element={ <SignInAndSignUpPage/> } />
+          <Route exact path='/signin' element={ this.props.currentUser? <Navigate to='/' /> : <SignInAndSignUpPage/> } />
         </Routes>
       </div>
     );
   }
+}
+
+const mapStateToProps = (state) => {
+  return({
+    currentUser: state.user.currentUser
+  });
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -58,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
   });
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
