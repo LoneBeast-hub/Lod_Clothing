@@ -1,5 +1,5 @@
 import './collection-preview.styles.scss';
-import { CollectionItem } from '../collection-item/collection-item.component';
+import CollectionItem from '../collection-item/collection-item.component';
 
 // create & export collection preview
 export const CollectionPreview = ({title, items}) => {
@@ -11,9 +11,9 @@ export const CollectionPreview = ({title, items}) => {
             {/* preview items */}
             <div className="preview">
                 {
-                    items.filter((item, index) => index < 4).map(({ id, ...otherItemProps }) => {
+                    items.filter((item, index) => index < 4).map((item) => {
                         return(
-                            <CollectionItem key={ id }  { ...otherItemProps } />
+                            <CollectionItem key={ item.id }  item={item} />
                         );
                     })
                 }
