@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { HomePage } from './pages/homepage/homepage.component';
-import { ShopPage } from './pages/shop/shop.component';
+import ShopPage from './pages/shop/shop.component';
 import Checkout from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component'
@@ -47,7 +47,7 @@ class App extends Component {
         <Header/>
         <Routes>
           <Route exact path='/' element={ <HomePage/> } />
-          <Route exact path='/shop' element={ <ShopPage/> } />
+          <Route exact path='/shop/*' element={ <ShopPage/> } />
           <Route exact path='/signin' element={ this.props.currentUser? <Navigate to='/' /> : <SignInAndSignUpPage/> } />
           <Route exact path='/checkout' element={ <Checkout/> } />
         </Routes>
