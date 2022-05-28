@@ -1,9 +1,10 @@
-import './sign-up.styles.scss';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import { Component } from 'react';
 import { CustomButton } from '../custom-button/custom-button.component';
 import { FormInput } from '../form-input/form-input.component';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+// Styled Component
+import { SignUpContainer, TitleContainer } from './sign-up.styles';
 
 export class SignUp extends Component {
     constructor() {
@@ -55,8 +56,8 @@ export class SignUp extends Component {
         // destructure out the properties of our App sign up state
         const { displayName, email, password, confirmPassword } = this.state;
         return(
-            <div className='sign-up'>
-                <h2 className='title'>I do not have an account</h2>
+            <SignUpContainer>
+                <TitleContainer>I do not have an account</TitleContainer>
                 <span>Sign up with your email and password</span>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
@@ -93,7 +94,7 @@ export class SignUp extends Component {
                     />
                     <CustomButton type='submit'>Sign Up</CustomButton>
                 </form>
-            </div>
+            </SignUpContainer>
         );
     }
 }

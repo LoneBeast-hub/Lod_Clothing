@@ -1,15 +1,15 @@
-import './collection-preview.styles.scss';
 import CollectionItem from '../collection-item/collection-item.component';
+import { CollectionPreviewContainer, TitleContainer, PreviewContainer } from './collection-preview.styles';
 
 // create & export collection preview
 export const CollectionPreview = ({title, items}) => {
     return(
         // Collection preview
-        <div className="collection-preview">
+        <CollectionPreviewContainer>
             {/* title */}
-            <h1 className='title' > { title } </h1>
+            <TitleContainer> { title } </TitleContainer>
             {/* preview items */}
-            <div className="preview">
+            <PreviewContainer>
                 {
                     items.filter((item, index) => index < 4).map((item) => {
                         return(
@@ -17,7 +17,7 @@ export const CollectionPreview = ({title, items}) => {
                         );
                     })
                 }
-            </div>
-        </div>
+            </PreviewContainer>
+        </CollectionPreviewContainer>
     );
 }

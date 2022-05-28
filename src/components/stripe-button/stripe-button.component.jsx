@@ -1,4 +1,4 @@
-import StripeCheckout from "react-stripe-checkout";
+import { StripeCheckoutContainer } from "./stripe-button.styles";
 
 export const StripeCheckoutButton = ({ price }) => {
     const priceForStripe = price *100;
@@ -9,7 +9,7 @@ export const StripeCheckoutButton = ({ price }) => {
     }
 
     return(
-        <StripeCheckout 
+        <StripeCheckoutContainer 
             label="Pay Now"
             name="Lod Clothing Ltd."
             billingAddress

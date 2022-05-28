@@ -1,29 +1,31 @@
-import './checkout-item.styles.scss';
 import { connect } from 'react-redux';
 import { clearItemFromCart, removeItem, addItem } from '../../redux/cart/cart.actions';
+
+// styled Components
+import { CheckoutItemContainer, ImageContainer, ImgContainer, NameContainer, QuantityContainer, ArrowContainer, ValueContainer, RemoveButtonContainer, PriceContainer } from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem, clearItem, removeItem, addItem }) => {
     const {imageUrl, price, name, quantity} = cartItem;
     return(
-        <div className="checkout-item">
-            <div className="image-container">
-                <img src={imageUrl} alt="item" />
-            </div>
-            <span className="name"> {name} </span>
-            <span className="quantity">
-                <div className='arrow' onClick={() => {
+        <CheckoutItemContainer>
+            <ImageContainer>
+                <ImgContainer src={imageUrl} alt="item" />
+            </ImageContainer>
+            <NameContainer> {name} </NameContainer>
+            <QuantityContainer>
+                <ArrowContainer onClick={() => {
                     removeItem(cartItem)
-                }} >&#10094;</div>
-                <span className="value">{quantity}</span>
-                <div className='arrow' onClick={() => {
+                }} >&#10094;</ArrowContainer>
+                <ValueContainer className="value">{quantity}</ValueContainer>
+                <ArrowContainer className='arrow' onClick={() => {
                     addItem(cartItem)
-                }} >&#10095;</div>
-            </span>
-            <span className="price"> {price} </span>
-            <span className="remove-button" onClick={() => {
+                }} >&#10095;</ArrowContainer>
+            </QuantityContainer>
+            <PriceContainer> {price} </PriceContainer>
+            <RemoveButtonContainer onClick={() => {
                 return(clearItem(cartItem));
-            }} > &#10005; </span>
-        </div>
+            }} > &#10005; </RemoveButtonContainer>
+        </CheckoutItemContainer>
     )
 }
 

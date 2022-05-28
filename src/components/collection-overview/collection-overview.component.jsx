@@ -1,12 +1,14 @@
-import './collection-overview.styles.scss';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { CollectionPreview } from '../collection-preview/collection-preview.component';
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 
+// styled components
+import { CollectionOverviewContainer } from './collection-overview.styles';
+
 const CollectionsOverview = ({ collections }) => {
     return(
-        <div className='collections-overview'>
+        <CollectionOverviewContainer>
             {
                 collections.map(({id, ...otherCollectionProps}) => {
                     return(
@@ -14,7 +16,7 @@ const CollectionsOverview = ({ collections }) => {
                     );
                 })
             }
-        </div>
+        </CollectionOverviewContainer>
     );
 }
 

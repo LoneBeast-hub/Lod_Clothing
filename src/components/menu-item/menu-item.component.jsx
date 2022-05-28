@@ -1,24 +1,24 @@
-import './menu-item.styles.scss';
 import { useNavigate } from 'react-router-dom';
+
+// styled Component
+import { MenuItemContainer, BgImageContainer, ContentContainer, TitleContainer, SubtitleContainer } from './menu-item.styles';
 
 // menuItem with destructured props
 export const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
     let navigate = useNavigate();
     return(
-        <div className={`${size} menu-item`} onClick={ 
+        <MenuItemContainer size={size} onClick={ 
             () => {
                 navigate(linkUrl);
             }
          } >
-            <div className='background-image'
-                style={{
-                    backgroundImage: `url(${imageUrl})`
-                }}
+            <BgImageContainer
+                imageUrl={imageUrl}
             />
-            <div className="content">
-                <h1 className="title"> { title.toUpperCase() } </h1>
-                <span className="subtitle">SHOP NOW</span>
-            </div>
-        </div>
+            <ContentContainer>
+                <TitleContainer> { title.toUpperCase() } </TitleContainer>
+                <SubtitleContainer>SHOP NOW</SubtitleContainer>
+            </ContentContainer>
+        </MenuItemContainer>
     );
 }

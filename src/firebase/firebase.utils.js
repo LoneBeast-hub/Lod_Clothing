@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { doc, getFirestore, getDoc, serverTimestamp, setDoc } from '@firebase/firestore'
-import '@firebase/firestore'
+import { doc, getFirestore, getDoc, serverTimestamp, collection, setDoc, writeBatch } from '@firebase/firestore'
+import '@firebase/firestore';
 
 
 const firebaseConfig = {
@@ -17,8 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-const db = getFirestore(app);
-
+export const db = getFirestore(app);
 // References
 // const userColRef = collection(db, 'users');
 
@@ -45,7 +44,44 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
   
   return userDocRef;
-} 
+}
+
+// Programmatically add our shop data to our firebase db
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  // Create the collection with collectionKey value
+  const collectionRef = collection(db, collectionKey);
+  console.log(collectionRef);
+
+  // continue from here
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = doc(collectionRef);
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit()
+}
+
+// modify the collections snapshot gotten from our firebase collections
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return({
+      id: doc.id,
+      routeName: encodeURI(title.toLowerCase()),
+      title,
+      items
+    });
+  })
+
+  // reduce the transformedCollection array to an object
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {})
+}
+
 const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle = () => {
