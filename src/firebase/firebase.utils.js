@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { doc, getFirestore, getDoc, serverTimestamp, collection, setDoc, writeBatch } from '@firebase/firestore'
 import '@firebase/firestore';
 
@@ -75,17 +75,21 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     });
   })
 
-  // reduce the transformedCollection array to an object
+  // reduce the transformedCollection array to an object with each title value as each property value
   return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {})
 }
 
-const provider = new GoogleAuthProvider();
+export const googleProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
-  return(
-    signInWithPopup(auth, provider)
-  );
+// get currentUser on authStateChange
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject)
+  })
 }

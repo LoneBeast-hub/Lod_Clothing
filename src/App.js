@@ -8,33 +8,17 @@ import Checkout from './pages/checkout/checkout.component';
 import Header from './components/header/header.component'
 import { SignInAndSignUpPage } from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { Component } from 'react';
-import { auth } from './firebase/firebase.utils';
-import { createUserProfileDocument } from './firebase/firebase.utils';
-import { onSnapshot } from '@firebase/firestore';
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
+import { checkUserSession } from './redux/user/user.actions';
 
 class App extends Component {
   unsubscribeFromAuth = null
   componentDidMount() {
-    const { setCurrentUser } = this.props
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if(userAuth) {
-        // get the return value of userDocRef from the create profile func
-        const userDocRef = await createUserProfileDocument(userAuth);
-        
-        // snapshot to set the value of our user info inside our state
-        onSnapshot(userDocRef, (snapshot) => {
-          setCurrentUser( {
-            id: snapshot.id,
-            ...snapshot.data()
-          })
-        })
-      }
-      setCurrentUser(userAuth);
-    })
+    const { checkUserSession } = this.props;
+
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -62,10 +46,10 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => {
   return({
-    setCurrentUser: (user) => {
-      return(dispatch(setCurrentUser(user)));
+    checkUserSession: () => {
+      return(dispatch(checkUserSession()))
     }
-  });
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

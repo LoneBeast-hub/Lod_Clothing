@@ -1,13 +1,14 @@
 import CollectionItem from '../collection-item/collection-item.component';
 import { CollectionPreviewContainer, TitleContainer, PreviewContainer } from './collection-preview.styles';
+import { Link } from 'react-router-dom';
 
 // create & export collection preview
-export const CollectionPreview = ({title, items}) => {
+export const CollectionPreview = ({title, items, routeName}) => {
     return(
         // Collection preview
         <CollectionPreviewContainer>
             {/* title */}
-            <TitleContainer> { title } </TitleContainer>
+            <TitleContainer as={Link} to={routeName} > { title } </TitleContainer>
             {/* preview items */}
             <PreviewContainer>
                 {

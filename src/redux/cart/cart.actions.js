@@ -30,3 +30,10 @@ export const removeItem = (item) => {
         payload: item
     })
 }
+
+// clear cart
+export const clearCart = () => {
+    return({
+        type: cartActionTypes.CLEAR_CART
+    });
+}
