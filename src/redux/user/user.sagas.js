@@ -44,7 +44,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
     try {
         // get the user object from email signIn
         const { user } = yield signInWithEmailAndPassword(auth, email, password);
-
+        
         // invoke getSnapshotFromUserAuth
         yield getSnapshotFromUserAuth(user);
     } catch(error) {
