@@ -21,6 +21,10 @@ export const ContentContainer = styled.div`
     background-color: #fff;
     position: absolute;
     opacity: 0.7;
+
+    @media screen and (max-width: 500px) {
+        width: 60%;
+    }
 `;
 
 export const TitleContainer = styled.h1`
@@ -28,25 +32,43 @@ export const TitleContainer = styled.h1`
     margin-bottom: 6px;
     font-size: 22px;
     color: #4a4a4a;
+    text-align: center;
+
+    @media screen and (max-width: 500px) {
+        font-size: 18px;
+    }
+
+    @media screen and (max-width: 400px) {
+        font-size: 15px;
+    }
 `;
 
 export const SubtitleContainer = styled.span`
     font-weight: lighter;
     font-size: 16px;
+    text-align: center;
+
+    @media screen and (max-width: 500px) {
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 400px) {
+        font-size: 10px;
+    }
 `;
 
 export const MenuItemContainer = styled.div`
     min-width: 30%;
-    height: 240px;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: center;
     border: 1px solid black;
     margin: 0 7.5px 15px;
     overflow: hidden;
     height: ${({ size }) => {
-        return size? '380px': '';
+        return size? '380px': '240px';
     }};
 
     &.large {
@@ -71,5 +93,9 @@ export const MenuItemContainer = styled.div`
     }
     &:hover > ${ContentContainer} {
         opacity: 0.9;
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 200px;
     }
 `;

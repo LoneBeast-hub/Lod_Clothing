@@ -26,15 +26,27 @@ export const ImgContainer = styled.img`
 
 export const NameContainer = styled.span`
     ${infoStyles}
+
+    @media screen and (max-width: 500px) {
+        font-size: 14px;
+    }
 `;
 
 export const QuantityContainer = styled.span`
     ${infoStyles}
     display: flex;
+
+    @media screen and (max-width: 500px) {
+        font-size: 14px;
+    }
 `;
 
 export const PriceContainer = styled.span`
     ${infoStyles}
+
+    @media screen and (max-width: 500px) {
+        font-size: 14px;
+    }    
 `;
 
 export const ArrowContainer = styled.div`
@@ -48,4 +60,9 @@ export const ValueContainer = styled.span`
 export const RemoveButtonContainer = styled.span`
     padding-left: 12px;
     cursor: pointer;
+
+    @media screen and (max-width: 500px) {
+        padding-left: 0;
+        font-size: 14px;
+    }
 `;

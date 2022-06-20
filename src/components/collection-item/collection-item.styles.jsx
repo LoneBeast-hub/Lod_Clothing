@@ -28,6 +28,13 @@ export const CustomButtonContainer = styled.button`
     position: absolute;
     top: 255px;
     display: none;
+
+    @media screen and (max-width: 800px) {
+        display: block;
+        opacity: 0.8;
+        min-width: unset;
+        padding: 0 10px;
+    }
 `;
 
 export const NameContainer = styled.span`
@@ -55,5 +62,22 @@ export const CollectionItemContainer = styled.div`
             opacity: 0.85;
             display: flex;
         }
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+        grid-column: auto / span 2;
+
+        &:hover {
+            ${ImageContainer} {
+                opacity: unset;
+            }
+            ${CustomButtonContainer} {
+                opacity: unset;
+            }
+        }
+    }
+    @media screen and (max-width: 400px) {
+        grid-column: auto / span 4;
     }
 `;
